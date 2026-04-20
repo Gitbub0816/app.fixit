@@ -10,7 +10,7 @@ namespace FixItQC.Api.Controllers.V1.Integrations;
 [Route("api/v1/integrations/mappings")]
 public sealed class MappingProfilesController(FixItQcDbContext db) : ControllerBase
 {
-    [HttpGet("suggestions")]
+    [HttpPost("suggestions")]
     public IActionResult Suggestions([FromBody] string payload)
     {
         var suggestions = new MappingEngineService().SuggestMappings(payload);

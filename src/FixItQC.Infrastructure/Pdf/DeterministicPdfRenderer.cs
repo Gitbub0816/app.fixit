@@ -1,18 +1,44 @@
 using System.Text;
 using FixItQC.Application.Abstractions;
+using FixItQC.Application.Pdf;
 
 namespace FixItQC.Infrastructure.Pdf;
 
 public sealed class DeterministicPdfRenderer : IPdfReportRenderer
 {
-    public byte[] RenderWorkOrderPdf(object model) => Render("WORK ORDER", model);
-    public byte[] RenderAuditPdf(object model) => Render("AUDIT", model);
-    public byte[] RenderDamagePdf(object model) => Render("DAMAGE", model);
+    private readonly DeterministicPaginator _paginator = new();
 
-    private static byte[] Render(string reportType, object model)
+    public byte[] RenderWorkOrderPdf(object model) => Render("WORK ORDER", model, BuildOperationalBlocks());
+    public byte[] RenderAuditPdf(object model) => Render("AUDIT", model, BuildOperationalBlocks());
+    public byte[] RenderDamagePdf(object model) => Render("DAMAGE", model, BuildOperationalBlocks());
+
+    private byte[] Render(string reportType, object model, IReadOnlyList<PdfLayoutBlock> blocks)
     {
-        // Placeholder scaffolding where a deterministic layout PDF engine (QuestPDF/iText7)
-        // can define explicit blocks, table pagination, repeated headers and intentional page breaks.
-        return Encoding.UTF8.GetBytes($"%PDF-FAKE\nType={reportType}\nModel={model}\n");
+        var pages = _paginator.Paginate(blocks, 100);
+        var sb = new StringBuilder();
+        sb.AppendLine("%PDF-FAKE");
+        sb.AppendLine($"Type={reportType}");
+        sb.AppendLine($"Model={model}");
+        sb.AppendLine($"Pages={pages.Count}");
+
+        for (var i = 0; i < pages.Count; i++)
+        {
+            sb.AppendLine($"Page[{i + 1}] Header=FixItQC {reportType}");
+            foreach (var block in pages[i].Blocks)
+            {
+                sb.AppendLine($"  Block={block.Title};Height={block.Height};KeepTogether={block.KeepTogether}");
+            }
+            sb.AppendLine("PageFooter=Confidential/FixItQC");
+        }
+
+        return Encoding.UTF8.GetBytes(sb.ToString());
     }
+
+    private static IReadOnlyList<PdfLayoutBlock> BuildOperationalBlocks() =>
+    [
+        new("Summary", 20),
+        new("Checklist Results", 40),
+        new("Image Grid", 30),
+        new("Signoff", 15)
+    ];
 }
