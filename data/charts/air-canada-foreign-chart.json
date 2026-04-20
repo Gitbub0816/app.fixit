@@ -1,0 +1,5 @@
+{
+  "carrier": "Air Canada",
+  "formats": ["metric", "imperial"],
+  "note": "Manual data source placeholder for international conversion references"
+}
