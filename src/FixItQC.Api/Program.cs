@@ -1,5 +1,6 @@
 using FixItQC.Application.Abstractions;
 using FixItQC.Application.Authorization;
+using FixItQC.Application.Services;
 using FixItQC.Infrastructure.Diagnostics;
 using FixItQC.Infrastructure.Pdf;
 using FixItQC.Infrastructure.Storage;
@@ -10,6 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddSingleton<IScopeAuthorizer, ScopeAuthorizer>();
 builder.Services.AddSingleton<IFileStorage, LocalFileStorage>();
 builder.Services.AddSingleton<IPdfReportRenderer, DeterministicPdfRenderer>();
+builder.Services.AddSingleton<InspectionWindowService>();
+builder.Services.AddSingleton<FuelingWorkflowService>();
 builder.Services.AddProblemDetails();
 
 var app = builder.Build();
