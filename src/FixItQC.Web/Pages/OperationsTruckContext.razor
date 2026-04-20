@@ -1,0 +1,15 @@
+@page "/operations/truck/{TruckNumber}"
+@code {
+    [Parameter] public string TruckNumber { get; set; } = string.Empty;
+}
+
+<h1>Truck Context: @TruckNumber</h1>
+<p>Core operational hub with PM due/overdue, running balance, lockout indicator, and quick actions.</p>
+<ul>
+    <li>Start Inspection</li>
+    <li>Start ATA/QC Check</li>
+    <li>Add Damage (zone-based)</li>
+    <li>Enter Stick Reading</li>
+    <li>Add Fuel Activity</li>
+    <li>Open Work Orders</li>
+</ul>

@@ -1,0 +1,35 @@
+:root {
+  --bg-0: #12151a;
+  --bg-1: #1a1f27;
+  --border: #2e3743;
+  --text: #f4f8ff;
+  --accent: #3ea4ff;
+  --ok: #17c964;
+  --warn: #f5a524;
+  --danger: #f31260;
+}
+
+body {
+  background: linear-gradient(180deg, var(--bg-0), #0f1218);
+  color: var(--text);
+  font-family: Inter, Segoe UI, sans-serif;
+}
+
+.card {
+  background: color-mix(in srgb, var(--bg-1) 92%, white 8%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.9rem;
+}
+
+.ptt-fab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  border: 1px solid var(--border);
+  background: linear-gradient(145deg, #1f2732, #18212c);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+}
