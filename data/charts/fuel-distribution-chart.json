@@ -1,0 +1,6 @@
+{
+  "profile": "generic-narrowbody",
+  "max_wing_imbalance_lbs": 1000,
+  "max_variance_percent": 10,
+  "note": "Admin configurable bounds can override these defaults"
+}
