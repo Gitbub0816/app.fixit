@@ -11,9 +11,7 @@ public sealed class UserProfile : BaseEntity
     public Guid? OrganizationId { get; set; }
     public Guid? RegionId { get; set; }
     public Guid? StationId { get; set; }
-    public bool AllowBackgroundAudio { get; set; }
 }
-
 
 public sealed class Equipment : BaseEntity
 {

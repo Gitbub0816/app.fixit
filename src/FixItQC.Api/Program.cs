@@ -31,7 +31,6 @@ builder.Services.AddSingleton<InspectionWindowService>();
 builder.Services.AddSingleton<FuelingWorkflowService>();
 builder.Services.AddSingleton<RadioCommsService>();
 builder.Services.AddHostedService<IntegrationProcessingWorker>();
-builder.Services.AddHostedService<KpiAggregationWorker>();
 builder.Services.AddProblemDetails();
 
 var app = builder.Build();

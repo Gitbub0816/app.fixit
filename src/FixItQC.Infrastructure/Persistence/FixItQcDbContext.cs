@@ -13,11 +13,6 @@ public sealed class FixItQcDbContext(DbContextOptions<FixItQcDbContext> options)
     public DbSet<DispatchRecord> DispatchRecords => Set<DispatchRecord>();
     public DbSet<DispatchFlight> DispatchFlights => Set<DispatchFlight>();
     public DbSet<InspectionRecord> InspectionRecords => Set<InspectionRecord>();
-    public DbSet<InspectionTemplate> InspectionTemplates => Set<InspectionTemplate>();
-    public DbSet<InspectionTemplateSection> InspectionTemplateSections => Set<InspectionTemplateSection>();
-    public DbSet<InspectionTemplateItem> InspectionTemplateItems => Set<InspectionTemplateItem>();
-    public DbSet<InspectionExecution> InspectionExecutions => Set<InspectionExecution>();
-    public DbSet<WorkOrder> WorkOrders => Set<WorkOrder>();
     public DbSet<PmTemplate> PmTemplates => Set<PmTemplate>();
     public DbSet<PmSchedule> PmSchedules => Set<PmSchedule>();
     public DbSet<DamageRecord> DamageRecords => Set<DamageRecord>();
@@ -38,7 +33,5 @@ public sealed class FixItQcDbContext(DbContextOptions<FixItQcDbContext> options)
         modelBuilder.Entity<IntegrationMessage>().HasIndex(x => new { x.SourceMessageId, x.SourceSystem }).IsUnique();
         modelBuilder.Entity<MappingRule>().HasIndex(x => new { x.ProfileId, x.ExternalField }).IsUnique();
         modelBuilder.Entity<RunningBalanceLedgerEvent>().HasIndex(x => new { x.EquipmentId, x.EventUtc });
-        modelBuilder.Entity<InspectionTemplate>().HasIndex(x => new { x.Name, x.IsJigTemplate });
-        modelBuilder.Entity<WorkOrder>().HasIndex(x => new { x.StationId, x.Status });
     }
 }

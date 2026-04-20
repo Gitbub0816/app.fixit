@@ -41,17 +41,8 @@ FixIt QC unifies:
 - `POST /api/v1/integrations/airlines/{airlineCode}/flights:upsert`
 - `POST /api/v1/integrations/airlines/{airlineCode}/flights:bulk-upsert`
 - `POST /api/v1/integrations/airlines/{airlineCode}/assignments:upsert`
-- `POST /api/v1/integrations/mappings/suggestions`
+- `GET /api/v1/integrations/mappings/suggestions`
 - `POST /api/v1/integrations/mappings/profiles`
-
-- `GET /api/v1/compliance/pm/schedules`
-- `GET /api/v1/compliance/pm/due-eval`
-- `POST /api/v1/compliance/inspections/execute`
-- `POST /api/v1/comms/transmit`
-- `POST /api/v1/comms/users/{userId}/background-audio`
-- `GET /api/v1/reports/work-orders/{id}.pdf`
-- `GET /api/v1/reports/audits/{id}.pdf`
-- `GET /api/v1/reports/damage/{id}.pdf`
 
 ### Realtime (SignalR)
 - `/hubs/dispatch`
@@ -69,10 +60,6 @@ FixIt QC unifies:
 - PM / inspection entities and compliance window evaluation.
 - Bulletin creation, submit-upward workflow, and acknowledgements.
 - KPI snapshot and station leaderboard endpoints.
-
-- ATA/JIG/PM compliance APIs with cadence logic and auto-work-order generation from failed inspections.
-- Radio comms background-audio user setting endpoint.
-- Deterministic PDF pagination engine with explicit block/page model.
 
 ## Deferred production integrations
 
