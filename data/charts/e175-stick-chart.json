@@ -1,0 +1,9 @@
+{
+  "aircraft": "E175",
+  "units": "gallons",
+  "table": [
+    { "stick": 1, "left": 120, "right": 118 },
+    { "stick": 2, "left": 240, "right": 236 }
+  ],
+  "note": "Placeholder values; replace with certified chart data"
+}
