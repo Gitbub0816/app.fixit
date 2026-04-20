@@ -12,6 +12,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixItQC.Api", "src/FixItQC.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixItQC.Web", "src/FixItQC.Web/FixItQC.Web.csproj", "{55555555-5555-5555-5555-555555555555}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixItQC.Mobile", "src/FixItQC.Mobile/FixItQC.Mobile.csproj", "{66666666-6666-6666-6666-666666666666}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixItQC.SharedUI", "src/FixItQC.SharedUI/FixItQC.SharedUI.csproj", "{77777777-7777-7777-7777-777777777777}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixItQC.UnitTests", "tests/FixItQC.UnitTests/FixItQC.UnitTests.csproj", "{88888888-8888-8888-8888-888888888888}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixItQC.IntegrationTests", "tests/FixItQC.IntegrationTests/FixItQC.IntegrationTests.csproj", "{99999999-9999-9999-9999-999999999999}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

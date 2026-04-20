@@ -1,10 +1,12 @@
 using FixItQC.Application.Authorization;
 using FixItQC.Domain.Enums;
+using Xunit;
 
 namespace FixItQC.UnitTests;
 
 public sealed class ScopeAuthorizerTests
 {
+    [Fact]
     public void StationAdmin_CanManageSameStation()
     {
         var auth = new ScopeAuthorizer();
@@ -15,6 +17,7 @@ public sealed class ScopeAuthorizerTests
         var actor = new ScopeContext(PlatformRole.StationAdmin, org, region, station);
         var target = new ScopeContext(PlatformRole.Dispatcher, org, region, station);
 
-        _ = auth.CanManageUser(actor, target);
+        var result = auth.CanManageUser(actor, target);
+        Assert.True(result);
     }
 }

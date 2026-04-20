@@ -21,3 +21,15 @@ body {
   border-radius: 14px;
   padding: 0.9rem;
 }
+
+.ptt-fab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  border: 1px solid var(--border);
+  background: linear-gradient(145deg, #1f2732, #18212c);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+}

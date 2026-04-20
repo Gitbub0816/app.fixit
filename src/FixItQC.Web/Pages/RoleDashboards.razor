@@ -1,25 +1,28 @@
 @page "/dashboards"
 
 <h1>FixIt QC Role-Aware Dashboards</h1>
+<FloatingPttButton />
 
-<section>
+<section class="card">
   <h2>Operator Home</h2>
   <ul>
     <li>Assigned truck and shift context</li>
     <li>Running balance summary</li>
-    <li>Quick actions: Scan Truck, Start Inspection, Start ATA/QC Check, Fuel Entry, Report Issue</li>
+    <li>Fueling workflow queue + dispatch assignments</li>
+    <li>Due/overdue ATA/QC and PM inspection reminders</li>
   </ul>
 </section>
 
-<section>
+<section class="card">
   <h2>Dispatcher Home</h2>
   <ul>
-    <li>Dispatch board snapshot and overdue assignments</li>
-    <li>Receiving summary and gate visibility</li>
+    <li>QT-style timeline and sortable dispatch table</li>
+    <li>At-risk and delayed job watchlist</li>
+    <li>Receiving and gate-assignment visibility</li>
   </ul>
 </section>
 
-<section>
-  <h2>Station/Regional/Org/Global Admin Homes</h2>
-  <p>Distinct hotspot-focused information architecture is implemented by role keys and scope-aware widgets.</p>
+<section class="card">
+  <h2>Admin KPI Panels</h2>
+  <p>Station/Region/Org dashboards with on-time fueling, PM completion, QC compliance, and dispatch performance.</p>
 </section>

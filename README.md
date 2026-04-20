@@ -1,46 +1,69 @@
 # FixIt QC
 
-Unified aviation fueling operations + QC platform for Web + Windows + iOS + Android using a shared .NET architecture.
+Production-minded unified aviation fueling operations platform for Web + Windows + iOS + Android.
 
-## Architecture
+## Platform Scope
 
-- `FixItQC.Domain`: shared domain model (roles, org hierarchy, dispatch, running balance ledger, inspections, damage zones, PM templates/schedules, bulletins).
-- `FixItQC.Application`: scope-based authorization, fueling validation, compliance windows, approval-chain services, and app abstractions.
-- `FixItQC.Infrastructure`: local file storage, deterministic PDF rendering abstraction, diagnostics middleware, and multi-tenant dev seed contracts.
-- `FixItQC.Api`: ASP.NET Core API slices for dispatch, bulletins, fueling validation, and compliance scoring.
-- `FixItQC.Web`: role-aware Blazor page scaffolding for dashboards, truck context, dispatch visual timeline, fueling workflow, and PM calendar.
-- `FixItQC.Mobile`: MAUI Hybrid shell scaffold for Windows/iOS/Android.
+FixIt QC unifies:
+- operations / walkaround / ATA 103-aligned QC
+- dispatch (visual + table) and receiving
+- fueling workflow validation and on-time compliance
+- PM and recurring inspections
+- optional station-level JIG compliance scaffolding
+- in-app radio (PTT) and real-time bulletins
+- airline integration (AIDX + proprietary REST upserts)
+- KPI dashboards and leaderboards
 
-## Product Rules implemented in scaffold
+## Solution Layout
 
-- Single unified app model with role-aware exposure.
-- Exact role set: GlobalAdmin, OrganizationalAdmin, RegionalAdmin, StationAdmin, Dispatcher, Technician, Operator.
-- Multi-tenant hierarchy: Organization -> Region -> Station.
-- Organization types flags: FuelServiceProvider, Airline, FuelStorageFacility.
-- Running balance built as event ledger model (not a single field).
-- ATA/QC and PM/inspection records scaffolded as first-class entities.
-- Damage zone IDs persisted for future `.glb` zone model support.
-- Deterministic PDF renderer abstraction with explicit layout expectations.
-- Real-time communication module contract (PTT + channel scopes + voice/text hooks).
-- Safety bulletin scope + upward approval workflow scaffolding.
-- Fueling workflow validation rules and on-time compliance scoring.
-- Inspection 5-day window + grace period compliance evaluation.
+- `src/FixItQC.Domain` - entities, enums, hierarchy, dispatch, compliance, integrations, realtime.
+- `src/FixItQC.Application` - authorization, fueling/compliance rules, comms, and mapping engine logic.
+- `src/FixItQC.Infrastructure` - EF Core `FixItQcDbContext`, storage, PDF renderer, diagnostics, seed data.
+- `src/FixItQC.Api` - REST APIs, v1 integration endpoints, SignalR hubs, hosted worker, Swagger.
+- `src/FixItQC.Web` - Blazor pages and shared UI styles/components including floating PTT button.
+- `src/FixItQC.Mobile` - MAUI-ready project placeholder.
+- `src/FixItQC.SharedUI` - shared Razor UI project.
+- `tests/FixItQC.UnitTests` - unit tests for rules/authorization.
+- `tests/FixItQC.IntegrationTests` - integration-oriented behavior tests.
 
-## API Endpoints (current slices)
+## Key APIs
 
+### Core
 - `GET /health`
 - `GET /api/dispatch/board`
-- `GET /api/safetybulletins`
-- `POST /api/fueling/validate?plannedGallons=5200`
-- `GET /api/compliance/inspection-window?dueDate=2026-04-21&today=2026-04-20`
-- `GET /api/compliance/on-time?departureUtc=...&completedUtc=...`
+- `POST /api/fueling/validate`
+- `GET /api/compliance/inspection-window`
+- `GET /api/compliance/on-time`
+- `GET/POST /api/safetybulletins`
 
-## Notes
+### Integrations
+- `POST /api/v1/integrations/aidx/messages`
+- `POST /api/v1/integrations/airlines/{airlineCode}/flights:upsert`
+- `POST /api/v1/integrations/airlines/{airlineCode}/flights:bulk-upsert`
+- `POST /api/v1/integrations/airlines/{airlineCode}/assignments:upsert`
+- `GET /api/v1/integrations/mappings/suggestions`
+- `POST /api/v1/integrations/mappings/profiles`
 
-This repository now includes functional business-rule services and endpoint scaffolding; remaining production integrations are intentionally deferred:
+### Realtime (SignalR)
+- `/hubs/dispatch`
+- `/hubs/comms`
+- `/hubs/bulletins`
 
-- Production auth provider.
-- Production object/blob storage.
-- Certified chart/table values.
-- Final `.glb` damage model assets.
-- App store signing.
+## Production-minded characteristics already implemented
+
+- Raw integration payload retention and source message tracking.
+- Mapping profile abstraction and field suggestion heuristics.
+- Partial flight upsert behavior and idempotent AIDX handling by source message ID.
+- Dispatch status model includes `AtRisk`, `Delayed`, `Cancelled`, and `Exception`.
+- Fueling rules enforce required fields, tank balancing thresholds, and variance checks.
+- On-time scoring model (`Green` >= 5 min, `Yellow` 0-5 min, `Red` late).
+- PM / inspection entities and compliance window evaluation.
+- Bulletin creation, submit-upward workflow, and acknowledgements.
+- KPI snapshot and station leaderboard endpoints.
+
+## Deferred production integrations
+
+- enterprise auth provider and IAM.
+- finalized deterministic PDF engine implementation (QuestPDF/iText integration layer).
+- production blob/object provider.
+- full MAUI shell wiring and native audio stack implementation.
